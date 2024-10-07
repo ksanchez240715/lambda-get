@@ -1,0 +1,65 @@
+service: lambda-get
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+
+functions:
+  getPeopleApi:
+    handler: src/handlers/peopleHandler.getPeopleApi
+    events:
+      - http:
+          path: people
+          method: GET
+          cors: true
+  getPeopleApiById:
+    handler: src/handlers/peopleHandler.getPeopleApiById
+    events:
+      - http:
+          path: people/{id}
+          method: GET
+          cors: true
+  getPlanetApi:
+    handler: src/handlers/planetHandler.getPlanetApi
+    events:
+      - http:
+          path: planet
+          method: GET
+          cors: true
+  getPlanetApiById:
+    handler: src/handlers/planetHandler.getPlanetApiById
+    events:
+      - http:
+          path: planet/{id}
+          method: GET
+          cors: true
+  getVehicle:
+    handler: src/handlers/vehicleHandler.getVehicle
+    events:
+      - http:
+          path: vehicle
+          method: GET
+          cors: true
+  getVehicleById:
+    handler: src/handlers/vehicleHandler.getVehicleById
+    events:
+      - http:
+          path: vehicle/{id}
+          method: GET
+          cors: true
+  getSpecie:
+    handler: src/handlers/specieHandler.getSpecie
+    events:
+      - http:
+          path: specie
+          method: GET
+          cors: true
+  getSpecieById:
+    handler: src/handlers/specieHandler.getSpecieById
+    events:
+      - http:
+          path: specie/{id}
+          method: GET
+          cors: true
