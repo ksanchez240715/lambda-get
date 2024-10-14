@@ -1,33 +1,29 @@
-import knex from 'knex';
-import config from '../../knexfile';
-
-const db = knex(config.development);
+import axios from "axios";
+import {People} from "../Models/PeopleModel";
+import * as dotenv from 'dotenv';
+dotenv.config();
+// const API_URL = process.env.API_SWAPI;
+const API_URL = "https://swapi.py4e.com/api/";
 
 class PeopleRepository {
-    async getAllPeople(): Promise<any[]> {
-        return db('people').select(
-            'id',
-            'nombre',
-            'anio_nacimiento',
-            'color_ojos',
-            'genero',
-            'color_cabello',
-            'altura',
-            'masa',
-            'color_piel',
-            'mundo_natal',
-            'peliculas',
-            'especies',
-            'naves_estelares',
-            'vehiculos',
-            'creado',
-            'editado',
-            'url'
-        );
+    async getAllPeople(): Promise<People[]> {
+        try {
+            const { data } = await axios.get(`${API_URL}/people`);
+            const { results } = data;
+            return results.map((data) => new People(data));
+        } catch (error) {
+            throw new Error('Error fetching people from API');
+        }
     }
 
-    async getPeopleById(id: number): Promise<any> {
-        return db('people').where({ id }).first();
+    async getPeopleById(id: number): Promise<People> {
+        try
+        {
+            const { data } = await axios.get(`${API_URL}/people/${id}`);
+            return new People(data);
+        } catch (error) {
+            throw new Error('Error');
+        }
     }
 }
 

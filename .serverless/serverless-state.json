@@ -14,52 +14,10 @@
         "AWSTemplateFormatVersion": "2010-09-09",
         "Description": "The AWS CloudFormation template for this Serverless application",
         "Resources": {
-          "GetPeopleApiLogGroup": {
+          "ApiHandlerLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getPeopleApi"
-            }
-          },
-          "GetPeopleApiByIdLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getPeopleApiById"
-            }
-          },
-          "GetPlanetApiLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getPlanetApi"
-            }
-          },
-          "GetPlanetApiByIdLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getPlanetApiById"
-            }
-          },
-          "GetVehicleLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getVehicle"
-            }
-          },
-          "GetVehicleByIdLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getVehicleById"
-            }
-          },
-          "GetSpecieLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getSpecie"
-            }
-          },
-          "GetSpecieByIdLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/lambda-get-dev-getSpecieById"
+              "LogGroupName": "/aws/lambda/lambda-get-dev-apiHandler"
             }
           },
           "IamRoleLambdaExecution": {
@@ -140,16 +98,16 @@
               }
             }
           },
-          "GetPeopleApiLambdaFunction": {
+          "ApiHandlerLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
+                "S3Key": "serverless/lambda-get/dev/1728929817527-2024-10-14T18:16:57.527Z/lambda-get.zip"
               },
-              "Handler": "src/handlers/peopleHandler.getPeopleApi",
+              "Handler": "handler.api",
               "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getPeopleApi",
+              "FunctionName": "lambda-get-dev-apiHandler",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
@@ -165,283 +123,17 @@
               }
             },
             "DependsOn": [
-              "GetPeopleApiLogGroup"
+              "ApiHandlerLogGroup"
             ]
           },
-          "GetPeopleApiByIdLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
-              },
-              "Handler": "src/handlers/peopleHandler.getPeopleApiById",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getPeopleApiById",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "NODE_OPTIONS": "--enable-source-maps"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetPeopleApiByIdLogGroup"
-            ]
-          },
-          "GetPlanetApiLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
-              },
-              "Handler": "src/handlers/planetHandler.getPlanetApi",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getPlanetApi",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "NODE_OPTIONS": "--enable-source-maps"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetPlanetApiLogGroup"
-            ]
-          },
-          "GetPlanetApiByIdLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
-              },
-              "Handler": "src/handlers/planetHandler.getPlanetApiById",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getPlanetApiById",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "NODE_OPTIONS": "--enable-source-maps"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetPlanetApiByIdLogGroup"
-            ]
-          },
-          "GetVehicleLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
-              },
-              "Handler": "src/handlers/vehicleHandler.getVehicle",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getVehicle",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "NODE_OPTIONS": "--enable-source-maps"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetVehicleLogGroup"
-            ]
-          },
-          "GetVehicleByIdLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
-              },
-              "Handler": "src/handlers/vehicleHandler.getVehicleById",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getVehicleById",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "NODE_OPTIONS": "--enable-source-maps"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetVehicleByIdLogGroup"
-            ]
-          },
-          "GetSpecieLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
-              },
-              "Handler": "src/handlers/specieHandler.getSpecie",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getSpecie",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "NODE_OPTIONS": "--enable-source-maps"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetSpecieLogGroup"
-            ]
-          },
-          "GetSpecieByIdLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": "serverless-framework-deployments-us-east-1-25f59da2-0c72",
-                "S3Key": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z/lambda-get.zip"
-              },
-              "Handler": "src/handlers/specieHandler.getSpecieById",
-              "Runtime": "nodejs18.x",
-              "FunctionName": "lambda-get-dev-getSpecieById",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "NODE_OPTIONS": "--enable-source-maps"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "GetSpecieByIdLogGroup"
-            ]
-          },
-          "GetPeopleApiLambdaVersion0e6yRsiErtjZAMgBfWJSJ47FJ21kHY1fB43RDNE9vU": {
+          "ApiHandlerLambdaVersionQ4HgZUTPBgja3XIxZ8sjMabVISulUhjqKAXuhykBDI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "GetPeopleApiLambdaFunction"
+                "Ref": "ApiHandlerLambdaFunction"
               },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
-            }
-          },
-          "GetPeopleApiByIdLambdaVersion2aotSDNl7BdjGFBuS5sgBHiR4flvEoAs0qsOfTbiI": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetPeopleApiByIdLambdaFunction"
-              },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
-            }
-          },
-          "GetPlanetApiLambdaVersion7bLTmqWOdvryHJASK3OjgJRszi54URUKkaBxgQ": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetPlanetApiLambdaFunction"
-              },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
-            }
-          },
-          "GetPlanetApiByIdLambdaVersion6c3PnEqg8QQAicqMtrFhP2hLsagO1sTUZwAEfblEU4": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetPlanetApiByIdLambdaFunction"
-              },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
-            }
-          },
-          "GetVehicleLambdaVersionok45X1pKaiOCsoxsSCrRFvggZXiG7xfUjY0lGpzuY": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetVehicleLambdaFunction"
-              },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
-            }
-          },
-          "GetVehicleByIdLambdaVersionmxMa1AGdnTyyv0xgYaCPLBAL5M8vHuqApjy3znVQwA": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetVehicleByIdLambdaFunction"
-              },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
-            }
-          },
-          "GetSpecieLambdaVersionAL2cmoRz0Y9S1AJlGZ4JmSEtaxwhpxM3TzsbTIxU": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetSpecieLambdaFunction"
-              },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
-            }
-          },
-          "GetSpecieByIdLambdaVersionxt4kbzKVR8L4VeddrUd1EinmhilSJR1LyNO38": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetSpecieByIdLambdaFunction"
-              },
-              "CodeSha256": "zWuX5ItFDL4VqolO7rctSfvz/DHAvL0wqBgtmloEDG8="
+              "CodeSha256": "kNac+TT8hIAnQa82Ogcrb1sc0wdWUnSl7dj+hqnCI+4="
             }
           },
           "ApiGatewayRestApi": {
@@ -955,7 +647,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetPeopleApiLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -967,7 +659,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetPeopleApiLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodPeopleIdVarGet": {
@@ -1001,7 +693,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetPeopleApiByIdLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1013,7 +705,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetPeopleApiByIdLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodPlanetGet": {
@@ -1047,7 +739,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetPlanetApiLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1059,7 +751,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetPlanetApiLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodPlanetIdVarGet": {
@@ -1093,7 +785,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetPlanetApiByIdLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1105,7 +797,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetPlanetApiByIdLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodVehicleGet": {
@@ -1139,7 +831,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetVehicleLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1151,7 +843,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetVehicleLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodVehicleIdVarGet": {
@@ -1185,7 +877,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetVehicleByIdLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1197,7 +889,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetVehicleByIdLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodSpecieGet": {
@@ -1231,7 +923,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetSpecieLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1243,7 +935,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetSpecieLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodSpecieIdVarGet": {
@@ -1277,7 +969,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetSpecieByIdLambdaFunction",
+                          "ApiHandlerLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -1289,10 +981,10 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetSpecieByIdLambdaPermissionApiGateway"
+              "ApiHandlerLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1728302343158": {
+          "ApiGatewayDeployment1728929814331": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1319,271 +1011,12 @@
               "ApiGatewayMethodSpecieIdVarGet"
             ]
           },
-          "GetPeopleApiLambdaPermissionApiGateway": {
+          "ApiHandlerLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "GetPeopleApiLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetPeopleApiByIdLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetPeopleApiByIdLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetPlanetApiLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetPlanetApiLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetPlanetApiByIdLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetPlanetApiByIdLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetVehicleLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetVehicleLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetVehicleByIdLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetVehicleByIdLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetSpecieLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetSpecieLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "GetSpecieByIdLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "GetSpecieByIdLambdaFunction",
+                  "ApiHandlerLambdaFunction",
                   "Arn"
                 ]
               },
@@ -1623,76 +1056,13 @@
               "Name": "sls-lambda-get-dev-ServerlessDeploymentBucketName"
             }
           },
-          "GetPeopleApiLambdaFunctionQualifiedArn": {
+          "ApiHandlerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetPeopleApiLambdaVersion0e6yRsiErtjZAMgBfWJSJ47FJ21kHY1fB43RDNE9vU"
+              "Ref": "ApiHandlerLambdaVersionQ4HgZUTPBgja3XIxZ8sjMabVISulUhjqKAXuhykBDI"
             },
             "Export": {
-              "Name": "sls-lambda-get-dev-GetPeopleApiLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetPeopleApiByIdLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetPeopleApiByIdLambdaVersion2aotSDNl7BdjGFBuS5sgBHiR4flvEoAs0qsOfTbiI"
-            },
-            "Export": {
-              "Name": "sls-lambda-get-dev-GetPeopleApiByIdLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetPlanetApiLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetPlanetApiLambdaVersion7bLTmqWOdvryHJASK3OjgJRszi54URUKkaBxgQ"
-            },
-            "Export": {
-              "Name": "sls-lambda-get-dev-GetPlanetApiLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetPlanetApiByIdLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetPlanetApiByIdLambdaVersion6c3PnEqg8QQAicqMtrFhP2hLsagO1sTUZwAEfblEU4"
-            },
-            "Export": {
-              "Name": "sls-lambda-get-dev-GetPlanetApiByIdLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetVehicleLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetVehicleLambdaVersionok45X1pKaiOCsoxsSCrRFvggZXiG7xfUjY0lGpzuY"
-            },
-            "Export": {
-              "Name": "sls-lambda-get-dev-GetVehicleLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetVehicleByIdLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetVehicleByIdLambdaVersionmxMa1AGdnTyyv0xgYaCPLBAL5M8vHuqApjy3znVQwA"
-            },
-            "Export": {
-              "Name": "sls-lambda-get-dev-GetVehicleByIdLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetSpecieLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetSpecieLambdaVersionAL2cmoRz0Y9S1AJlGZ4JmSEtaxwhpxM3TzsbTIxU"
-            },
-            "Export": {
-              "Name": "sls-lambda-get-dev-GetSpecieLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetSpecieByIdLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetSpecieByIdLambdaVersionxt4kbzKVR8L4VeddrUd1EinmhilSJR1LyNO38"
-            },
-            "Export": {
-              "Name": "sls-lambda-get-dev-GetSpecieByIdLambdaFunctionQualifiedArn"
+              "Name": "sls-lambda-get-dev-ApiHandlerLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -1725,10 +1095,13 @@
       },
       "vpc": {}
     },
+    "plugins": [
+      "serverless-offline"
+    ],
     "pluginsData": {},
     "functions": {
-      "getPeopleApi": {
-        "handler": "src/handlers/peopleHandler.getPeopleApi",
+      "apiHandler": {
+        "handler": "handler.api",
         "events": [
           {
             "http": {
@@ -1753,22 +1126,7 @@
               },
               "integration": "AWS_PROXY"
             }
-          }
-        ],
-        "name": "lambda-get-dev-getPeopleApi",
-        "environment": {
-          "NODE_OPTIONS": "--enable-source-maps"
-        },
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "GetPeopleApiLambdaVersion0e6yRsiErtjZAMgBfWJSJ47FJ21kHY1fB43RDNE9vU"
-      },
-      "getPeopleApiById": {
-        "handler": "src/handlers/peopleHandler.getPeopleApiById",
-        "events": [
+          },
           {
             "http": {
               "path": "people/{id}",
@@ -1792,22 +1150,7 @@
               },
               "integration": "AWS_PROXY"
             }
-          }
-        ],
-        "name": "lambda-get-dev-getPeopleApiById",
-        "environment": {
-          "NODE_OPTIONS": "--enable-source-maps"
-        },
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "GetPeopleApiByIdLambdaVersion2aotSDNl7BdjGFBuS5sgBHiR4flvEoAs0qsOfTbiI"
-      },
-      "getPlanetApi": {
-        "handler": "src/handlers/planetHandler.getPlanetApi",
-        "events": [
+          },
           {
             "http": {
               "path": "planet",
@@ -1831,22 +1174,7 @@
               },
               "integration": "AWS_PROXY"
             }
-          }
-        ],
-        "name": "lambda-get-dev-getPlanetApi",
-        "environment": {
-          "NODE_OPTIONS": "--enable-source-maps"
-        },
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "GetPlanetApiLambdaVersion7bLTmqWOdvryHJASK3OjgJRszi54URUKkaBxgQ"
-      },
-      "getPlanetApiById": {
-        "handler": "src/handlers/planetHandler.getPlanetApiById",
-        "events": [
+          },
           {
             "http": {
               "path": "planet/{id}",
@@ -1870,22 +1198,7 @@
               },
               "integration": "AWS_PROXY"
             }
-          }
-        ],
-        "name": "lambda-get-dev-getPlanetApiById",
-        "environment": {
-          "NODE_OPTIONS": "--enable-source-maps"
-        },
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "GetPlanetApiByIdLambdaVersion6c3PnEqg8QQAicqMtrFhP2hLsagO1sTUZwAEfblEU4"
-      },
-      "getVehicle": {
-        "handler": "src/handlers/vehicleHandler.getVehicle",
-        "events": [
+          },
           {
             "http": {
               "path": "vehicle",
@@ -1909,22 +1222,7 @@
               },
               "integration": "AWS_PROXY"
             }
-          }
-        ],
-        "name": "lambda-get-dev-getVehicle",
-        "environment": {
-          "NODE_OPTIONS": "--enable-source-maps"
-        },
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "GetVehicleLambdaVersionok45X1pKaiOCsoxsSCrRFvggZXiG7xfUjY0lGpzuY"
-      },
-      "getVehicleById": {
-        "handler": "src/handlers/vehicleHandler.getVehicleById",
-        "events": [
+          },
           {
             "http": {
               "path": "vehicle/{id}",
@@ -1948,22 +1246,7 @@
               },
               "integration": "AWS_PROXY"
             }
-          }
-        ],
-        "name": "lambda-get-dev-getVehicleById",
-        "environment": {
-          "NODE_OPTIONS": "--enable-source-maps"
-        },
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "GetVehicleByIdLambdaVersionmxMa1AGdnTyyv0xgYaCPLBAL5M8vHuqApjy3znVQwA"
-      },
-      "getSpecie": {
-        "handler": "src/handlers/specieHandler.getSpecie",
-        "events": [
+          },
           {
             "http": {
               "path": "specie",
@@ -1987,22 +1270,7 @@
               },
               "integration": "AWS_PROXY"
             }
-          }
-        ],
-        "name": "lambda-get-dev-getSpecie",
-        "environment": {
-          "NODE_OPTIONS": "--enable-source-maps"
-        },
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs18.x",
-        "vpc": {},
-        "versionLogicalId": "GetSpecieLambdaVersionAL2cmoRz0Y9S1AJlGZ4JmSEtaxwhpxM3TzsbTIxU"
-      },
-      "getSpecieById": {
-        "handler": "src/handlers/specieHandler.getSpecieById",
-        "events": [
+          },
           {
             "http": {
               "path": "specie/{id}",
@@ -2028,7 +1296,7 @@
             }
           }
         ],
-        "name": "lambda-get-dev-getSpecieById",
+        "name": "lambda-get-dev-apiHandler",
         "environment": {
           "NODE_OPTIONS": "--enable-source-maps"
         },
@@ -2037,7 +1305,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetSpecieByIdLambdaVersionxt4kbzKVR8L4VeddrUd1EinmhilSJR1LyNO38"
+        "versionLogicalId": "ApiHandlerLambdaVersionQ4HgZUTPBgja3XIxZ8sjMabVISulUhjqKAXuhykBDI"
       }
     },
     "configValidationMode": "warn",
@@ -2046,6 +1314,9 @@
       "service": "lambda-get",
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -2056,7 +1327,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/lambda-get/dev/1728302347494-2024-10-07T11:59:07.494Z",
+    "artifactDirectoryName": "serverless/lambda-get/dev/1728929817527-2024-10-14T18:16:57.527Z",
     "artifact": "lambda-get.zip"
   }
 }

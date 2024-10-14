@@ -1,32 +1,23 @@
-import knex from 'knex';
-import config from '../../knexfile';
+import { Vehicle } from "../Models/db/Vehicles";
+import {Repository} from "typeorm";
+import AppDataSource from "../Config/data-source";
 
-const db = knex(config.development);
+class VehicleRepository
+{
+    private vehicleRepository: Repository<Vehicle>;
 
-class VehicleRepository {
-    async getAllVehicles(): Promise<any[]> {
-        return db('Vehicles').select(
-            'capacidad_carga',
-            'consumibles',
-            'costo_creditos',
-            'creado',
-            'tripulacion',
-            'editado',
-            'longitud',
-            'fabricante',
-            'velocidad_maxima_atmosferica',
-            'modelo',
-            'nombre',
-            'pasajeros',
-            'pilotos',
-            'peliculas',
-            'url',
-            'clase_vehiculo'
-        );
+    constructor()
+    {
+        this.vehicleRepository = AppDataSource.getRepository(Vehicle);
     }
 
-    async getVehicleById(id: number): Promise<any> {
-        return db('Vehicles').where({ id }).first();
+    async getAllVehicles(): Promise<Vehicle[]> {
+        return await this.vehicleRepository.find();
+    }
+
+    async getVehicleById(id: number): Promise<Vehicle | null> {
+        const vehicle = await this.vehicleRepository.findOneBy({id});
+        return vehicle as Vehicle | null;
     }
 }
 

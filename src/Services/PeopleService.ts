@@ -1,17 +1,17 @@
-import ApiService from './ApiService';
-import {MapKeys} from "../Utils/ParserObject";
-import PeopleModel from "../Models/PeopleModel";
+import PeopleRepository from "../Repositories/PeopleRepository";
 
 const getPeopleListApi = async () => {
     try
     {
-        const responsePeopleApi = await ApiService.fetchPeopleFromAPI();
+        const responsePeopleApi = await PeopleRepository.getAllPeople();
 
-        return responsePeopleApi.map((data: any) => {
-            return MapKeys(data, PeopleModel);
+        return responsePeopleApi.map((data) => {
+            return data;
         });
+
     }
-    catch (error) {
+    catch (error)
+    {
         console.error('Error get Api StarWars API:', error);
         throw new Error('Error service Api');
     }
@@ -20,9 +20,9 @@ const getPeopleListApi = async () => {
 const getPeopleById = async (id: number) => {
     try
     {
-        const responsePeopleApi = await ApiService.fetchPeopleByIdFromAPI(id);
+        const responsePeopleApi = await PeopleRepository.getPeopleById(id);
 
-        return MapKeys(responsePeopleApi,PeopleModel);
+        return responsePeopleApi;
     }
     catch (error)
     {

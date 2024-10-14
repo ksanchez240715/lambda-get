@@ -1,16 +1,13 @@
-import PlanetModel from '../Models/PlanetModel';
-import ApiService from './ApiService';
-import {MapKeys} from "../Utils/ParserObject";
+import PlanetRepository from "../Repositories/PlanetRepository";
 
 const getPlanetApi = async () => {
     try
     {
-        const responsePlanetApi = await ApiService.fetchPlanetFromAPI();
+        const responsePlanetApi = await PlanetRepository.getAllPlanet();
 
         return responsePlanetApi.map((data: any) => {
-            return MapKeys(data,PlanetModel)
+            return data.GetApiData();
         });
-
     }
     catch (error)
     {
@@ -23,9 +20,9 @@ const getPlanetApi = async () => {
 const getPlanetApiById = async (id: number) => {
     try
     {
-        const responsePlanetApi = await ApiService.fetchPeopleByIdFromAPI(id);
+        const responsePlanetApi = await PlanetRepository.getPlanetById(id);
 
-        return MapKeys(responsePlanetApi, PlanetModel);
+        return responsePlanetApi.GetApiData();
     } catch (error) {
         console.error('Error get Api StarWars API:', error);
         throw new Error('Error service Api');

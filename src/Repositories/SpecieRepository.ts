@@ -1,31 +1,22 @@
-import knex from 'knex';
-import config from '../../knexfile';
-
-const db = knex(config.development);
+import AppDataSource from '../Config/data-source';
+import { Repository  } from 'typeorm';
+import { Specie } from "../Models/db/Species";
 
 class SpecieRepository {
-    async getAllSpecies(): Promise<any[]> {
-        return db('Species').select(
-            'altura_promedio',
-            'esperanza_vida_promedio',
-            'clasificacion',
-            'creado',
-            'designacion',
-            'editado',
-            'colores_ojos',
-            'colores_cabello',
-            'mundo_natal',
-            'idioma',
-            'nombre',
-            'gente',
-            'peliculas',
-            'colores_piel',
-            'url'
-        );
+    private specieRepository: Repository<Specie>;
+    constructor()
+    {
+        this.specieRepository = AppDataSource.getRepository(Specie);
     }
 
-    async getSpecieById(id: number): Promise<any> {
-        return db('Species').where({ id }).first();
+    async getAllSpecies(): Promise<Specie[]> {
+        return await this.specieRepository.find();
+    }
+
+    async getSpecieById(id: number): Promise<Specie | null> {
+        const specie = await this.specieRepository.findOneBy({ id });
+
+        return specie as Specie | null;
     }
 }
 
