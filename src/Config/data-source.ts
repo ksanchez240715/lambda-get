@@ -1,15 +1,15 @@
 import { DataSource } from 'typeorm';
 import { Specie } from '../Models/db/Species';
 import { Vehicle } from '../Models/db/Vehicles';
-import * as dotenv from 'dotenv';
-dotenv.config();
+// import * as dotenv from 'dotenv';
+// dotenv.config();
 const AppDataSource = new DataSource({
     type: 'mysql',
-    host: process.env.DB_HOST,
+    host: "databasesrt.cvyiy8cgudnb.us-east-1.rds.amazonaws.com",
     port: 3306,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    username: "admin",
+    password: "Chihuahua",
+    database: "api_backend_ks",
     entities: [
         Specie,
         Vehicle
